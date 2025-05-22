@@ -8,7 +8,7 @@ interface HeroHeadingProps {
 
 const HeroHeading: React.FC<HeroHeadingProps> = ({ children }) => {
   return (
-    <h1 className='text-4xl md:text-6xl lg:text-7xl text-ipsum mb-4 md:mb-6 animate-fade-in'>
+    <h1 className='text-4xl md:text-6xl lg:text-7xl text-ipsum my-4 md:mb-6 animate-fade-in'>
       {children}
     </h1>
   );

@@ -5,21 +5,18 @@ import ServicePill from "./hero/ServicePill";
 
 const Hero: React.FC = () => {
   return (
-    <section className='relative min-h-screen flex flex-col justify-center pt-16'>
-      <div className='container px-4 mx-auto mt-16'>
-        <div className='max-w-4xl mb-28'>
-          <HeroHeading>
-            Compromise
-            <br />
-            No More!
-          </HeroHeading>
-        </div>
+    <section className='relative h-screen flex flex-col'>
+      <div className='container px-4 mx-auto pt-12'>
+        <HeroHeading>
+          Compromise
+          <br />
+          No More!
+        </HeroHeading>
+      </div>
 
-        <div className='relative h-[400px] md:h-[500px] mb-16 animate-fade-in'>
-          {/* Logo in center */}
+      <div className='flex-grow flex items-center justify-center'>
+        <div className='relative h-[400px] md:h-[500px] w-full animate-fade-in'>
           <CenterLogo />
-
-          {/* Service pills */}
           <ServicePill
             text='Email Marketing & Automation'
             position='top-32 left-[20%]'
@@ -53,17 +50,17 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div className='container px-4 mx-auto mt-8'>
-        <a
-          href='#services'
-          className='fixed bottom-6 left-6 z-50 h-16 w-16 rounded-full bg-ipsum-teal flex items-center justify-center text-white shadow-lg hover:bg-ipsum-teal/80 transition-colors'
-        >
-          <span className='text-sm'>Services</span>
-        </a>
-
-        <div className='flex justify-end'>
+      <div className='container px-4 mx-auto pb-6'>
+        <div className='flex justify-between items-center'>
+          <a
+            href='#services'
+            className='h-14 w-14 rounded-full bg-ipsum-teal flex flex-col items-center justify-center p-10 text-white shadow-lg hover:bg-ipsum-teal/80 transition-colors'
+          >
+            <span className='text-sm'>Services</span>
+            <span className='text-sm'>↓</span>
+          </a>
           <div className='max-w-xl text-right'>
-            <p className='text-lg md:text-xl lg:text-2xl text-ipsum mb-6'>
+            <p className='text-lg md:text-xl lg:text-2xl text-ipsum'>
               Get the quality and reliability of agencies at the price and speed
               of a freelancer for the services your business needs
             </p>
