@@ -1,0 +1,11 @@
+{
+  "name": "@repo/tailwind-config",
+  "main": "tailwind.config.js",
+  "types": "tailwind.config.d.ts",
+  "exports": {
+    ".": "./tailwind.config.js"
+  },
+  "dependencies": {
+    "tailwindcss-animate": "^1.0.7"
+  }
+}

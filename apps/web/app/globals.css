@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -5,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
   }
 }
@@ -46,5 +50,29 @@ a {
   }
   .imgDark {
     display: unset;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-white text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+  
+  .service-pill {
+    @apply px-4 py-2 text-sm bg-white text-black border border-gray-100 rounded-full shadow-sm 
+    hover:bg-gray-50 transition-all duration-300 absolute whitespace-nowrap;
+  }
+  
+  .center-logo {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  }
+  
+  .service-button {
+    @apply px-6 py-3 font-medium transition-colors duration-300 rounded-full bg-ipsum-teal text-white hover:bg-opacity-90;
   }
 }
