@@ -16,6 +16,7 @@ This Turborepo includes the following apps and packages:
 * `packages/ui`: Shared React UI components used across both apps
 * `packages/eslint-config`: Shared ESLint configuration (`eslint-config-next`, `prettier`)
 * `packages/typescript-config`: Shared TypeScript configuration (`tsconfig.json`)
+* `packages/tailwind-config`: Shared Tailwind & PostCss configuration
 
 All apps and packages are written in **TypeScript**.
 
