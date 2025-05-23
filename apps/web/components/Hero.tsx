@@ -50,17 +50,17 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div className='container px-4 mx-auto pb-6'>
-        <div className='flex justify-between items-center'>
-          <a
-            href='#services'
-            className='h-14 w-14 rounded-full bg-ipsum-teal flex flex-col items-center justify-center p-10 text-white shadow-lg hover:bg-ipsum-teal/80 transition-colors'
-          >
-            <span className='text-sm'>Services</span>
-            <span className='text-sm'>↓</span>
-          </a>
+      <div className='container px-4 mx-auto mt-8'>
+        <a
+          href='#services'
+          className='fixed bottom-6 left-6 z-50 h-16 w-16 rounded-full bg-ipsum-teal flex items-center justify-center text-white shadow-lg hover:bg-ipsum-teal/80 transition-colors'
+        >
+          <span className='text-sm'>Services</span>
+        </a>
+
+        <div className='flex justify-end'>
           <div className='max-w-xl text-right'>
-            <p className='text-lg md:text-xl lg:text-2xl text-ipsum'>
+            <p className='text-lg md:text-xl lg:text-2xl text-ipsum mb-6'>
               Get the quality and reliability of agencies at the price and speed
               of a freelancer for the services your business needs
             </p>
