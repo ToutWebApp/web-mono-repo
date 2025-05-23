@@ -53,9 +53,10 @@ const Hero: React.FC = () => {
       <div className='container px-4 mx-auto mt-8'>
         <a
           href='#services'
-          className='fixed bottom-6 left-6 z-50 h-16 w-16 rounded-full bg-ipsum-teal flex items-center justify-center text-white shadow-lg hover:bg-ipsum-teal/80 transition-colors'
+          className='fixed bottom-6 left-6 z-50 h-16 w-16 p-10 rounded-full bg-ipsum-teal flex flex-col items-center justify-center text-white shadow-lg hover:bg-ipsum-teal/80 transition-colors'
         >
           <span className='text-sm'>Services</span>
+          <span className='text-sm'>↓</span>
         </a>
 
         <div className='flex justify-end'>
