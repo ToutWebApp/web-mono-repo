@@ -4,7 +4,7 @@ import * as React from "react"
 import * as MenubarPrimitive from "@radix-ui/react-menubar"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "../../lib/utils"
 
 //shadcn/ui uses React.ComponentPropsWithoutRef for these wrappers, but MenubarPrimitive.Menu etc are function components
 // so React.ComponentProps is more appropriate if we are just re-exporting or adding minimal props.

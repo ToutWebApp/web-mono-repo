@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
-} from '@repo/ui/src'; // Assuming @repo/ui is correctly linked
+} from '../../../packages/ui/src';
 
 export default function HomePage() {
   return (
