@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header />
-        <main className='pt-28'>
+        <main className=''>
           {" "}
           {/* adjust pt-20 based on Header height */}
           {children}
