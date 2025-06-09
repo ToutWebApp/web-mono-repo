@@ -31,29 +31,33 @@ export const StepsSection: FC = () => {
   ];
 
   return (
-    <section className='py-20 bg-white text-center'>
-      <h2 className='text-2xl md:text-3xl font-semibold mb-12 text-black'>
-        We help you in each step of the way
-      </h2>
+    <section className='relative min-h-screen bg-white text-center px-6 md:px-12 overflow-hidden flex items-center justify-center'>
+      <div className='w-full max-w-7xl mx-auto'>
+        <h2 className='text-2xl md:text-3xl font-semibold mb-12 text-black'>
+          We help you in each step of the way
+        </h2>
 
-      {/* Steps Grid */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 px-6 md:px-20'>
-        {steps.map((step, idx) => (
-          <div key={idx} className='flex flex-col items-center space-y-3'>
-            <div className='bg-green-100 p-4 rounded-full text-black'>
-              {step.icon}
+        {/* Steps Grid */}
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 px-6 md:px-20'>
+          {steps.map((step, idx) => (
+            <div key={idx} className='flex flex-col items-center space-y-3'>
+              <div className='bg-green-100 p-4 rounded-full text-black'>
+                {step.icon}
+              </div>
+              <h3 className='text-base font-semibold text-black'>
+                {step.title}
+              </h3>
+              <p className='text-sm text-gray-600'>{step.description}</p>
             </div>
-            <h3 className='text-base font-semibold text-black'>{step.title}</h3>
-            <p className='text-sm text-gray-600'>{step.description}</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* CTA Button */}
-      <div className='mt-12'>
-        <button className='bg-orange-500 hover:bg-orange-600 text-white py-2 px-6 rounded-full text-sm font-medium transition'>
-          View our Services
-        </button>
+        {/* CTA Button */}
+        <div className='mt-12'>
+          <button className='bg-orange-500 hover:bg-orange-600 text-white py-2 px-6 rounded-full text-sm font-medium transition'>
+            View our Services
+          </button>
+        </div>
       </div>
     </section>
   );
