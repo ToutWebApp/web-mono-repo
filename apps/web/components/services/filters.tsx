@@ -21,7 +21,7 @@ export function ServiceFilters() {
       <Input placeholder='Search' className='text-sm' />
 
       <div>
-        <label className='block mb-1 font-medium'>Business Stage</label>
+        <label className='block mb-2 font-bold'>Business Stage</label>
         <Select defaultValue='0-1'>
           <SelectTrigger className='text-sm'>
             <SelectValue placeholder='Select stage' />
@@ -34,7 +34,7 @@ export function ServiceFilters() {
       </div>
 
       <div>
-        <label className='block mb-1 font-medium'>Business Size</label>
+        <label className='block mb-2 font-bold'>Business Size</label>
         <Slider
           defaultValue={[1]}
           max={200}
@@ -44,7 +44,7 @@ export function ServiceFilters() {
       </div>
 
       <div>
-        <label className='block mb-1 font-medium'>Goal</label>
+        <label className='block mb-2 font-bold'>Goal</label>
         <Select>
           <SelectTrigger className='text-sm'>
             <SelectValue placeholder='Go Online' />
@@ -56,7 +56,7 @@ export function ServiceFilters() {
       </div>
 
       <div>
-        <label className='block mb-1 font-medium'>Service Type</label>
+        <label className='block mb-2 font-bold'>Service Type</label>
         <ToggleGroup type='single' className='flex gap-2'>
           <ToggleGroupItem
             value='create'
@@ -74,7 +74,7 @@ export function ServiceFilters() {
       </div>
 
       <div>
-        <label className='block mb-1 font-medium'>Maximum Waiting Time</label>
+        <label className='block mb-2 font-bold'>Maximum Waiting Time</label>
         <Slider
           defaultValue={[10]}
           max={30}
