@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@repo/ui/components/ui/button";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -21,9 +22,11 @@ export default function Hero() {
             Get the full force, quality and reliability of an international
             agency at the price and speed of freelancers.
           </p>
-          <Button className='bg-[#FD7E14] hover:bg-orange-600 text-white px-6 py-3 transition-all duration-300 hover:scale-105'>
-            View our Services
-          </Button>
+          <Link href='/questionnaire'>
+            <Button className='bg-[#FD7E14] hover:bg-orange-600 text-white px-6 py-3 transition-all duration-300 hover:scale-105'>
+              View our Services
+            </Button>
+          </Link>
         </div>
 
         {/* Right side - Mobile with Text */}
@@ -51,4 +54,3 @@ export default function Hero() {
     </section>
   );
 }
-
