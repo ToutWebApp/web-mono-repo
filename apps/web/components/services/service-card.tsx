@@ -21,7 +21,7 @@ export function ServiceCard({
 }: ServiceCardProps) {
   return (
     <div
-      className='border rounded-xl p-4 bg-white shadow-sm cursor-pointer hover:shadow-md transition'
+      className='rounded-xl p-6 bg-white shadow-sm cursor-pointer hover:shadow-md transition'
       onClick={onClick}
     >
       <div className='flex justify-between items-start'>
