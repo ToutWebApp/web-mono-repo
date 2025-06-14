@@ -8,6 +8,7 @@ interface ServiceCardProps {
   description: string;
   deliverables: string[];
   time: string;
+  onClick?: () => void;
 }
 
 export function ServiceCard({
@@ -16,9 +17,13 @@ export function ServiceCard({
   description,
   deliverables,
   time,
+  onClick,
 }: ServiceCardProps) {
   return (
-    <div className='border rounded-xl p-4 bg-white shadow-sm'>
+    <div
+      className='border rounded-xl p-4 bg-white shadow-sm cursor-pointer hover:shadow-md transition'
+      onClick={onClick}
+    >
       <div className='flex justify-between items-start'>
         <div>
           <p className='text-sm text-gray-500'>{category}</p>
