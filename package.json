@@ -18,6 +18,11 @@
     "node": ">=18"
   },
   "dependencies": {
-    "lucide-react": "*"
+    "@hookform/resolvers": "*",
+    "@tanstack/react-query": "^5.81.2",
+    "lucide-react": "*",
+    "next-auth": "^4.24.11",
+    "react-hook-form": "*",
+    "zod": "*"
   }
 }

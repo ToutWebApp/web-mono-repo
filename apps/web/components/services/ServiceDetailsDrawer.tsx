@@ -5,28 +5,25 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-  DrawerDescription,
   DrawerFooter,
   DrawerClose,
 } from "@repo/ui/components/ui/drawer";
 import { Button } from "@repo/ui/components/ui/button";
-import { Separator } from "@repo/ui/components/ui/separator";
+import { Service } from "@repo/api-client/src/apis/types/services.types";
+import { useRouter } from "next/navigation";
+
+interface UIService extends Service {
+  category: string;
+  revisions: number;
+  deliveryTime: string;
+  deliverablesCount: number;
+  professionals: string[];
+}
 
 interface ServiceDetailsDrawerProps {
   open: boolean;
   onClose: () => void;
-  service: {
-    category: string;
-    title: string;
-    revisions: number;
-    deliveryTime: string;
-    deliverablesCount: number;
-    description: string;
-    deliverables: string[];
-    professionals: string[];
-    terms: string;
-    price: number;
-  };
+  service: UIService;
 }
 
 export function ServiceDetailsDrawer({
@@ -34,13 +31,14 @@ export function ServiceDetailsDrawer({
   onClose,
   service,
 }: ServiceDetailsDrawerProps) {
+  const router = useRouter();
   return (
     <Drawer open={open} onOpenChange={onClose}>
       <DrawerContent className='max-w-2xl ml-auto h-full p-6 overflow-y-auto shadow-xl bg-white'>
         <DrawerHeader className='p-6 pb-4'>
           <p className='text-sm text-gray-500'>{service.category}</p>
           <DrawerTitle className='text-2xl font-semibold mt-1'>
-            {service.title}
+            {service.name}
           </DrawerTitle>
 
           {/* Horizontal stats bar */}
@@ -84,15 +82,22 @@ export function ServiceDetailsDrawer({
 
           <div className='flex items-start gap-6 py-3 border-b-2 border-[#DEE2E6]'>
             <div className='w-40 shrink-0 font-medium text-[#828282]'>
-              Deliverables
+              Business Details
             </div>
-            <ul className='space-y-1 list-disc list-inside text-gray-700'>
-              {service.deliverables.map((item, i) => (
-                <li key={i} className='text-[14px]'>
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className='space-y-2'>
+              <div className='flex items-center'>
+                <span className='font-medium w-32'>Business Size:</span>
+                <span>{service.businessSize}</span>
+              </div>
+              <div className='flex items-center'>
+                <span className='font-medium w-32'>Business Stage:</span>
+                <span>{service.businessStage.join(", ")}</span>
+              </div>
+              <div className='flex items-center'>
+                <span className='font-medium w-32'>Service Type:</span>
+                <span>{service.serviceType}</span>
+              </div>
+            </div>
           </div>
 
           <div className='flex items-start gap-6 py-3'>
@@ -113,14 +118,14 @@ export function ServiceDetailsDrawer({
               Terms and Conditions
             </div>
             <div className='bg-[#F1F3F5] p-4 rounded-md text-gray-600 text-[14px] leading-relaxed'>
-              {service.terms}
+              {service.termsConditions}
             </div>
           </div>
         </div>
 
         <DrawerFooter className='mt-6'>
-          <Button className='w-full bg-orange-500 hover:bg-orange-600 text-white'>
-            Purchase for ${service.price}
+          <Button onClick={() => router.push(`/checkout/${service.id}`)} className='w-full bg-orange-500 hover:bg-orange-600 text-white'>
+            Purchase for ${parseFloat(service.basePrice).toFixed(2)}
           </Button>
           <DrawerClose asChild>
             <Button variant='ghost' className='w-full'>
