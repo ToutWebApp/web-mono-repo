@@ -74,6 +74,8 @@ export async function loginWithEmail(
       withCredentials: true,
     }
   );
+  console.log("response", response);
+  
   return response.data;
 }
 

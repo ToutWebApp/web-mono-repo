@@ -47,9 +47,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   // Initialize user on mount
-  useEffect(() => {
-    refreshUser();
-  }, []);
+  // useEffect(() => {
+  //   refreshUser();
+  // }, []);
 
   // Listen for logout events from other tabs/windows
   useEffect(() => {
