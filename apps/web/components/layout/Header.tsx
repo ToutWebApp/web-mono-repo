@@ -8,6 +8,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetTitle,
   SheetTrigger,
 } from "@repo/ui/components/ui/sheet";
 import { Button } from "@repo/ui/components/ui/button";
@@ -31,7 +32,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, label, onClick }) => (
 
 export default function Header() {
   const { user, loading, logout } = useUser();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);  
 
   const handleSignOut = () => {
     logout();
@@ -58,6 +59,7 @@ export default function Header() {
           </SheetTrigger>
 
           <SheetContent side='right' className='w-full max-w-sm'>
+            <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
             <div className='flex flex-col items-center mt-8 space-y-6'>
               <SheetClose asChild>
                 <NavLink
@@ -84,9 +86,9 @@ export default function Header() {
                 <SheetClose asChild>
                   <Button
                     onClick={handleSignOut}
-                    className='text-lg font-medium rounded-full bg-ipsum-orange hover:bg-opacity-90'
+                    className='text-lg font-medium rounded-ful text-white bg-ipsum-orange hover:bg-opacity-90'
                   >
-                    <LogOut className='w-4 h-4 mr-2' /> Logout
+                    <LogOut className='w-4 h-4 mr-2 text-white' /> Logout
                   </Button>
                 </SheetClose>
               ) : (

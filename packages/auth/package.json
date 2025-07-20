@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "@repo/api-client": "workspace:^",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^3.1.2",
     "next-auth": "^4.24.5",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/jwt-decode": "^3.1.0",
     "@types/react": "18.2.66",
     "react": "^19.1.0"
   }

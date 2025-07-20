@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { QueryProvider } from "@repo/api-client";
 import { UserProvider } from "@repo/auth";

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Button } from "@repo/ui/components/ui/button";
+import { useUser } from "@repo/auth";
 
 export function Sidebar() {
+    const { user, loading, logout } = useUser();
   return (
     <aside className="w-[260px] h-full bg-white border-r px-6 pt-6 relative">
       <div className="flex items-center mb-8 space-x-3">
@@ -9,8 +11,8 @@ export function Sidebar() {
           AV
         </div>
         <div>
-          <p className="font-medium">Avinash Adam</p>
-          <p className="text-xs text-gray-500">A.Adams@company.com</p>
+          <p className="font-medium">{user?.firstName}</p>
+          <p className="text-xs text-gray-500">{user?.email}</p>
         </div>
       </div>
 

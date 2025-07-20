@@ -1,3 +1,4 @@
+// apps/web/app/auth/login/page.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -5,7 +6,6 @@ import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signInWithCredentials } from "@repo/auth/src/signInWithCredentials";
 import {
   Card,
   CardContent,
@@ -26,7 +26,7 @@ const loginSchema = z.object({
 type LoginFormInputs = z.infer<typeof loginSchema>;
 
 export default function WebLoginPage() {
-  const { login, loading } = useAuth();
+  const { login } = useAuth();
   const [loginError, setLoginError] = useState<string>("");
   
   const {
@@ -41,7 +41,7 @@ export default function WebLoginPage() {
     setLoginError("");
     
     try {
-      await login(data);      
+      await login(data); 
     } catch (error: any) {
       console.error("Login error:", error);
       

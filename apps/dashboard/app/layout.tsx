@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-import DashboardLayoutWrapper from "./dashboard-layout-wrapper";
 import "../../../packages/ui/src/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -17,9 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <DashboardLayoutWrapper>
-            {children}
-          </DashboardLayoutWrapper>
+          <main className=''>{children}</main>
         </Providers>
       </body>
     </html>

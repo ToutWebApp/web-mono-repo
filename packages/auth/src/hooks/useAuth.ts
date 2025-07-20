@@ -1,16 +1,26 @@
-
 // packages/auth/src/hooks/useAuth.ts
-import { useUser } from '../context/user-context';
-import { loginWithEmail, registerWithEmail, logout } from '../authClient';
-import { LoginCredentials, RegisterCredentials } from '../types';
+import { useUser } from "../context/user-context";
+import { loginWithEmail, registerWithEmail } from "../authClient";
+import { LoginCredentials, RegisterCredentials } from "../types";
 
 export const useAuth = () => {
-  const { user, loading, refresh, logout: contextLogout, isAuthenticated } = useUser();
+  const {
+    user,
+    loading,
+    refreshUser,
+    logout,
+    login: contextLogin,
+    isAuthenticated,
+  } = useUser();
 
   const login = async (credentials: LoginCredentials) => {
     try {
       const response = await loginWithEmail(credentials);
-      await refresh(); // Refresh user context after login
+      contextLogin({
+        accessToken: response.token,
+        refreshToken: response.refreshToken,
+      });
+      // await refreshUser();
       return response;
     } catch (error) {
       throw error;
@@ -19,8 +29,7 @@ export const useAuth = () => {
 
   const register = async (credentials: RegisterCredentials) => {
     try {
-      const response = await registerWithEmail(credentials);
-      return response;
+      return await registerWithEmail(credentials);
     } catch (error) {
       throw error;
     }
@@ -28,9 +37,9 @@ export const useAuth = () => {
 
   const signOut = async () => {
     try {
-      await contextLogout();
+      await logout();
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error("Logout error:", error);
     }
   };
 
@@ -41,6 +50,6 @@ export const useAuth = () => {
     login,
     register,
     logout: signOut,
-    refresh,
+    refreshUser,
   };
 };
