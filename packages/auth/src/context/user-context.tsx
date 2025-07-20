@@ -16,7 +16,7 @@ import {
 } from "..";
 import Cookies from "js-cookie";
 import { JwtPayload } from "jwt-decode";
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 import { apiClient } from "@repo/api-client";
 
 interface UserContextType {
@@ -37,6 +37,23 @@ const UserContext = createContext<UserContextType>({
   isAuthenticated: false,
 });
 
+// Helper function to get cookie options for cross-subdomain sharing
+const getCookieOptions = (isAccessToken = false) => {
+  const isProduction = process.env.NODE_ENV === "production";
+  const isLocalhost =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1");
+
+  return {
+    expires: isAccessToken ? 1 : 7, // Access token: 1 day, Refresh token: 7 days
+    path: "/",
+    secure: isProduction && !isLocalhost,
+    sameSite: "lax" as const,
+    domain: isProduction && !isLocalhost ? ".tout.company" : undefined,
+  };
+};
+
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +64,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const initializeAuth = async () => {
       const accessToken = Cookies.get("accessToken");
       const refreshToken = Cookies.get("refreshToken");
-      
+
       if (accessToken && refreshToken) {
         try {
           // Check if token is expired
@@ -55,7 +72,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
           const expiresAt = (decoded.exp || 0) * 1000;
           const now = Date.now();
           const buffer = 5 * 60 * 1000; // 5 minutes buffer
-          
+
           if (now + buffer > expiresAt) {
             await refreshTokens();
           } else {
@@ -88,22 +105,28 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   const handleTokenExpiry = () => {
+    // Remove cookies with the same domain settings used to set them
+    // const cookieOptions = getCookieOptions();
+
+    // Remove from current domain
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
+
+    // Also try to remove from parent domain in production
+    if (process.env.NODE_ENV === "production") {
+      Cookies.remove("accessToken", { domain: ".tout.company", path: "/" });
+      Cookies.remove("refreshToken", { domain: ".tout.company", path: "/" });
+    }
+
     setUser(null);
   };
 
   const loginUser = (tokens: { accessToken: string; refreshToken: string }) => {
-    // const cookieOptions = {
-    //   expires: 7,
-    //   path: '/',
-    //   secure: process.env.NODE_ENV === 'production',
-    //   sameSite: 'lax' as const,
-    //   domain: process.env.NODE_ENV === 'production' ? '.tout.company' : undefined
-    // };
+    const accessTokenOptions = getCookieOptions(true);
+    const refreshTokenOptions = getCookieOptions(false);
 
-    Cookies.set("accessToken", tokens.accessToken, { expires: 1 });
-    Cookies.set("refreshToken", tokens.refreshToken);
+    Cookies.set("accessToken", tokens.accessToken, accessTokenOptions);
+    Cookies.set("refreshToken", tokens.refreshToken, refreshTokenOptions);
     refreshUser();
   };
 
@@ -123,25 +146,20 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const refreshTokens = async (): Promise<boolean> => {
     if (isRefreshing) return false;
     setIsRefreshing(true);
-    
+
     try {
       const refreshToken = Cookies.get("refreshToken");
       if (!refreshToken) throw new Error("No refresh token available");
-      
+
       const tokens = await refreshTokenService(refreshToken);
       if (!tokens) throw new Error("Token refresh failed");
-      
-      // const cookieOptions = {
-      //   expires: 7,
-      //   path: '/',
-      //   secure: process.env.NODE_ENV === 'production',
-      //   sameSite: 'lax' as const,
-      //   domain: process.env.NODE_ENV === 'production' ? '.tout.company' : undefined
-      // };
 
-      Cookies.set("accessToken", tokens.token, {  expires: 1 });
-      Cookies.set("refreshToken", tokens.refreshToken);
-      
+      const accessTokenOptions = getCookieOptions(true);
+      const refreshTokenOptions = getCookieOptions(false);
+
+      Cookies.set("accessToken", tokens.token, accessTokenOptions);
+      Cookies.set("refreshToken", tokens.refreshToken, refreshTokenOptions);
+
       await refreshUser();
       return true;
     } catch (error) {
@@ -156,25 +174,25 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // Axios response interceptor for token refresh
   useEffect(() => {
     const interceptor = apiClient.interceptors.response.use(
-      response => response,
-      async error => {
+      (response) => response,
+      async (error) => {
         const originalRequest = error.config;
-        
+
         // Handle 401 errors (token expired)
         if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
-          
+
           const success = await refreshTokens();
           if (success) {
             // Retry the original request with new token
             return apiClient(originalRequest);
           }
         }
-        
+
         return Promise.reject(error);
       }
     );
-    
+
     return () => {
       apiClient.interceptors.response.eject(interceptor);
     };
@@ -185,13 +203,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const checkTokenExpiry = async () => {
       const accessToken = Cookies.get("accessToken");
       if (!accessToken) return;
-      
+
       try {
         const decoded = jwtDecode<JwtPayload>(accessToken);
         const expiresAt = (decoded.exp || 0) * 1000;
         const now = Date.now();
         const buffer = 5 * 60 * 1000; // 5 minutes buffer
-        
+
         if (now + buffer > expiresAt) {
           await refreshTokens();
         }
