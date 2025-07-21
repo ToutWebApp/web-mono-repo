@@ -1,3 +1,5 @@
+// packages/tailwind-config/tailwind-config.js
+
 module.exports = {
   darkMode: ["class"],
   prefix: "",
