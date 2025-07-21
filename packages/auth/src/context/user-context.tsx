@@ -178,7 +178,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       async (error) => {
         const originalRequest = error.config;
 
-        // Handle 401 errors (token expired)
+        // Handle 401 errors - (token expired)
         if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
 
