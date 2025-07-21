@@ -422,6 +422,9 @@ importers:
       '@vitest/ui':
         specifier: ^2.0.4
         version: 2.1.9(vitest@2.1.9)
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.21(postcss@8.5.3)
       eslint:
         specifier: ^9.26.0
         version: 9.26.0(jiti@1.21.7)
